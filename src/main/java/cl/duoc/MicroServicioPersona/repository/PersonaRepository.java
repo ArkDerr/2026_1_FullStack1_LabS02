@@ -11,12 +11,15 @@ import cl.duoc.MicroServicioPersona.model.Persona;
 @Repository
 public class PersonaRepository {
 
+    // Lista de personas
     private final List<Persona> listaPersonas = new ArrayList<>();
 
+    // Listar todas las personas de la lista
     public List<Persona> obtenerPersonas() {
         return new ArrayList<Persona>(listaPersonas);
     }
 
+    //Buscar una persona de la lista
     public Optional<Persona> buscarPorRut(int rut) {
         for (Persona persona : listaPersonas) {
             if (persona.getRut() == rut) {
@@ -26,11 +29,13 @@ public class PersonaRepository {
         return Optional.empty();
     }
 
+    //Guardar una persona en la lista
     public Persona guardarPersona(Persona persona) {
         listaPersonas.add(persona);
         return persona;
     }
 
+    //Actualizar una persona de la lista
     public Optional<Persona> actualizarPersona(Persona persona) {
         for (Persona user : listaPersonas) {
             if (persona.getRut() == user.getRut()) {
@@ -42,6 +47,7 @@ public class PersonaRepository {
         return Optional.empty();
     }
 
+    //Eliminar una persona de la lista
     public void eliminarPersona(Persona persona) {
         listaPersonas.remove(persona);
     }

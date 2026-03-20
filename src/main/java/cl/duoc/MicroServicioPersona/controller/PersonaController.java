@@ -23,13 +23,13 @@ public class PersonaController {
     @Autowired
     private PersonaService personaService;
 
-    // GET para obtener todas las personas
+    // GET para listar todas las personas
     @GetMapping
     public List<Persona> obtenerPersonas() {
         return personaService.obtenerPersonas();
     }
 
-    // GET para buscar por rut
+    // GET para buscar persona por rut
     @GetMapping("/{rut}")
     public Persona buscarPorRut(@PathVariable int rut) {
         return personaService.buscarPorRut(rut);
