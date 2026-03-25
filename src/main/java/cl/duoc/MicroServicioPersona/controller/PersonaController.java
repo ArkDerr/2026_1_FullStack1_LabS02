@@ -3,6 +3,7 @@ package cl.duoc.MicroServicioPersona.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.duoc.MicroServicioPersona.model.Persona;
 import cl.duoc.MicroServicioPersona.model.PersonaUpdate;
 import cl.duoc.MicroServicioPersona.service.PersonaService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/personas")
@@ -37,8 +39,13 @@ public class PersonaController {
 
     // POST para guardar persona
     @PostMapping
-    public Persona guardarPersona(@RequestBody Persona persona) {
-        return personaService.guardarPersona(persona);
+    public ResponseEntity<?> guardarPersona(@Valid @RequestBody Persona persona) {
+        try {
+            Persona nuevaPersona = personaService.guardarPersona(persona);
+            return ResponseEntity.status(201).body(nuevaPersona);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("El usuario no puede ser agregado");
+        }
     }
 
     // PUT para actualizar persona
